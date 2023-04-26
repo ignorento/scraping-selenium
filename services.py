@@ -21,7 +21,6 @@ class SocialNetworkScraper:
         self.is_logged_in = False
         self.is_reg_in = False
 
-
     def create_driver(self):
         """
         Create chrome driver instance
@@ -33,8 +32,6 @@ class SocialNetworkScraper:
             return self.driver
         except Exception as e:
             print(e.args)
-
-
 
     def social_network_register(self):
         self.driver.get(self.REGISTER_URL)
@@ -77,16 +74,10 @@ class SocialNetworkScraper:
 
         self.is_reg_in = True
 
-
-
     def social_network_login(self) -> object:
-        # create driver & navigate to login page
-        # driver = self.create_driver()
-        # driver.get(self.LOGIN_URL)
         self.driver.get(self.LOGIN_URL)
 
         username_elem = self.driver.find_element(By.XPATH, "//div[@class='form-group']/input[@id='username']")
-        # username_elem1 = driver.find_element(By.ID, "username")
         username_elem.send_keys(config.SOCIAL_NETWORK_LOGIN)
 
         password_elem = self.driver.find_element(By.XPATH, "//div[@class='form-group']/input[@id='password']")
@@ -116,14 +107,12 @@ class SocialNetworkScraper:
 
         return self.social_network_add_like()
 
-
     def social_network_add_like(self):
 
         like = self.driver.find_element(By.XPATH, "//div[@class='btn-group']/a[@class='btn btn-sm btn-outline-success']")
         like.click()
 
         return self.social_network_logout()
-
 
     def social_network_logout(self):
         logout = self.driver.find_element(By.XPATH, "//a[@href='/auth/logout']")
